@@ -1,0 +1,154 @@
+@use 'sass:math';
+/* Mixin */
+/* Set các giá trị với màn hình tương ứng */
+$minMobile-width: 408px;
+$mobile-width: 480px;
+$tablet-width: 768px;
+$custom-width: 807px;
+$desktop-width: 1024px;
+$screen-width: 1440px;
+$desktopMin-width: 1800px;
+$desktopMax-width: 2560px;
+$max-width-992: 992px;
+
+/* PC */
+@mixin PC {
+    @media (max-width: #{$screen-width}) {
+        @content;
+    }
+}
+
+@mixin OnlyPC {
+    @media (max-width: $screen-width) and (min-width: #{$desktop-width }) {
+        @content;
+    }
+}
+
+@mixin BigPC {
+    @media (min-width: #{$desktop-width - 1}) {
+        @content;
+    }
+}
+
+@mixin LargePC {
+    @media (min-width: #{$desktopMin-width - 1}) and (max-width: #{$desktopMax-width}) {
+        @content;
+    }
+}
+
+@mixin MaxWidth992 {
+    @media (max-width: #{$max-width-992}) {
+        @content;
+    }
+}
+
+/* Tablet */
+@mixin Tablet {
+    @media (min-width: #{$mobile-width + 1}) and (max-width: #{$desktop-width}) {
+        @content;
+    }
+}
+@mixin OnlyTablet {
+    @media (min-width: #{$custom-width + 1}) and (max-width: #{$desktop-width}) {
+        @content;
+    }
+}
+@mixin MiniTablet {
+    @media (min-width: #{$mobile-width + 1}) and (max-width: #{$custom-width}) {
+        @content;
+    }
+}
+
+@mixin Only1024 {
+    @media (min-width: #{$desktop-width - 1}) and (max-width: #{$desktop-width}) {
+        @content;
+    }
+}
+
+@mixin TabletMobile {
+    @media (max-width: #{$desktop-width}) {
+        @content;
+    }
+}
+
+@mixin MinTabletMobile {
+    @media (max-width: #{$tablet-width}) {
+        @content;
+    }
+}
+
+/* Mobile */
+@mixin Mobile {
+    @media (max-width: #{$mobile-width}) {
+        @content;
+    }
+}
+
+@mixin keyframes($name) {
+    @keyframes #{$name} {
+        @content;
+    }
+}
+
+@function p($size) {
+    @return ($size / 1440) * 100vw;
+}
+
+@function m($size) {
+    @return ($size / 375) * 100vw;
+}
+
+// =================
+@mixin TextShadow($color) {
+    -webkit-background-clip: text;
+    -webkit-text-stroke: 2px $color;
+}
+
+@mixin button {
+    padding: 12px 20px;
+    background-color: var(--colorRed);
+    color: var(--colorWhite);
+    text-transform: uppercase;
+    border: 2px solid var(--colorRed);
+    transition: var(--smooth);
+    font-family: 'Rowdies', cursive;
+    cursor: pointer;
+    font-size: 16px;
+    &:hover {
+        transform: scale(0.9);
+        box-shadow: 2px 4px 8px 0 var(--colorRed);
+    }
+    @media (max-width: 480px) {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+}
+
+@mixin buttonBorder {
+    background-color: transparent;
+    color: var(--colorWhite);
+}
+
+@mixin flexCenter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin flexSB {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+@mixin flexGap($gap) {
+    display: flex;
+    gap: $gap;
+}
+
+@mixin LineClamp($number) {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $number;
+    overflow: hidden;
+}
